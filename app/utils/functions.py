@@ -110,9 +110,24 @@ def find_first_element(response, tag = 'p'):
      # Extract the content of the first <tag> element
     first_element = soup.find(tag)
 
-    # Check if a <tag> element was found
+     # Check if a <tag> element was found
     if first_element:
         return first_element.get_text(strip=True)  # strip=True removes leading/trailing whitespaces       
     else:
-        print("No <tag> element found on the page.")  
+        print("No " + "<"+tag+">" + " element found on the page.")  
         return None
+
+def find_elements_by_regex(response, regex, container_tag = None, container_class = None):
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        if container_tag:
+            # Find a specific container, for example, a <div> with a specific class
+            container = soup.find(container_tag, class_=container_class)
+            # Use regex to find content in the container tag
+            all_text = container.get_text()
+        else: 
+            # Use regex to find content in the HTML content
+            all_text = soup.get_text()
+
+        return re.findall(regex, all_text)
