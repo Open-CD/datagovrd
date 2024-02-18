@@ -2,3 +2,5 @@ beautifulsoup4==4.12.2
 pandas>=2.1.4
 requests==2.31.0
 selenium==4.16.0
+uvicorn
+fastapi
