@@ -131,3 +131,17 @@ def find_elements_by_regex(response, regex, container_tag = None, container_clas
             all_text = soup.get_text()
 
         return re.findall(regex, all_text)
+
+def find_elements_by_tag(response, tag, container_tag = None, container_class = None):
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        if container_tag:
+            # Find a specific container, for example, a <div> with a specific class
+            container = soup.find(container_tag, class_=container_class)
+            elements = container.find_all(tag)
+        else:
+            elements = soup.find_all(tag)
+     
+        # Use tag to find content in the HTML content or container tag
+        return [p.get_text(strip=True) for p in elements]
