@@ -11,7 +11,7 @@ router = APIRouter()
 def get_general():
     return {
         "name": sns_info["name"],
-        "abbreviation": sns_info["name"],
+        "abbreviation": sns_info["abbreviation"],
         "description": GeneralService.get_about(),
         "services": sns_info["services"]
     }
