@@ -22,7 +22,7 @@ Este módulo implementa la API utilizando FastApi para el proyecto DataGovRD.
    python -m venv venv
    ```
 
-3. Crear un entorno virtual:
+3. Activar entorno virtual:
 
    - Para macOS
      ```shell
