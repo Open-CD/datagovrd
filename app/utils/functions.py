@@ -117,9 +117,9 @@ def find_first_element(response, tag = 'p'):
         print("No " + "<"+tag+">" + " element found on the page.")  
         return None
 
-def find_elements_by_regex(response, regex, container_tag = None, container_class = None):
+def find_elements_by_regex(regex, container_tag = None, container_class = None, response=None, content=None):
         # Parse the HTML content using BeautifulSoup
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text if response else content, 'html.parser')
 
         if container_tag:
             # Find a specific container, for example, a <div> with a specific class
@@ -129,12 +129,11 @@ def find_elements_by_regex(response, regex, container_tag = None, container_clas
         else: 
             # Use regex to find content in the HTML content
             all_text = soup.get_text()
-
         return re.findall(regex, all_text)
 
-def find_elements_by_tag(response, tag, container_tag = None, container_class = None):
+def find_elements_by_tag(tag, container_tag = None, container_class = None, response=None, content=None, exceptions=['']):
         # Parse the HTML content using BeautifulSoup
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text if response else content, 'html.parser')
 
         if container_tag:
             # Find a specific container, for example, a <div> with a specific class
@@ -144,4 +143,4 @@ def find_elements_by_tag(response, tag, container_tag = None, container_class = 
             elements = soup.find_all(tag)
      
         # Use tag to find content in the HTML content or container tag
-        return [p.get_text(strip=True) for p in elements]
+        return [p.get_text(strip=True) for p in elements if p.get_text(strip=True) not in exceptions]

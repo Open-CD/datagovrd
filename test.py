@@ -3,14 +3,14 @@ import pandas as pd
 
 import re
 
-from utils.data import month_names_dict
-from utils.functions import click_element_by_text, find_links_to_excel_files, download_excel_files_from_url
-from services.sns_service import GeneralService, StatsService
+# from app.utils.data import month_names_dict
+# from app.utils.functions import click_element_by_text, find_links_to_excel_files, download_excel_files_from_url
+from app.services.sns_service import GeneralService, StatsService
 
 # Reading Source files
-url_sources = pd.read_csv('data/sources_list.csv')
-df = pd.read_csv('data/input.csv')
-df = pd.merge(df, url_sources, on='nombre_corto', how='left')
+# url_sources = pd.read_csv('data/sources_list.csv')
+# df = pd.read_csv('data/input.csv')
+# df = pd.merge(df, url_sources, on='nombre_corto', how='left')
 
 CONF_HEADLESS_BROWSER = True
 
@@ -35,8 +35,9 @@ CONF_HEADLESS_BROWSER = True
 #     driver.close()
 #     return excel_links
 
-print(GeneralService.get_about('https://sns.gob.do/sobre-nosotros/quienes-somos/'))
-print(StatsService.get_available_years('https://sns.gob.do/transparencia/estadisticas-institucionales/'))
+# print(GeneralService.get_about('https://sns.gob.do/sobre-nosotros/quienes-somos/'))
+# print(StatsService.get_available_years('https://sns.gob.do/transparencia/estadisticas-institucionales/'))
+print(StatsService.get_available_quaters(year="2023", url='https://sns.gob.do/transparencia/estadisticas-institucionales/'))
 
 # # main function
 # if __name__ == "__main__":

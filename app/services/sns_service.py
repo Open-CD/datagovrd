@@ -1,7 +1,10 @@
 # Import necessary libraries
 import requests
+from selenium import webdriver
 
-from app.utils.functions import find_first_element, find_elements_by_regex, find_elements_by_tag
+from app.utils.functions import find_first_element, find_elements_by_regex, find_elements_by_tag, click_element_by_text
+
+options = webdriver.FirefoxOptions()
 
 # General information services
 
@@ -23,6 +26,7 @@ class GeneralService:
     def get_available_services(url):
         return None
 
+# Stats Service
 class StatsService:
     general_url = "https://sns.gob.do/transparencia/estadisticas-institucionales/"
 
@@ -48,12 +52,24 @@ class StatsService:
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
             # Parse the HTML content using BeautifulSoup
-            return find_elements_by_regex(response, r'\b\d{4}\b', container_tag='div', container_class='wpfd-categories')
+            return find_elements_by_regex(r'\b\d{4}\b', container_tag='div', container_class='wpfd-categories', response=response)
         else:
             # Print an error message if the request was not successful
             print(f"Error: Unable to retrieve data. Status code: {response.status_code}")
             return None
-    
+        
+    # Get the stats quaters years available in the institution     
+    def get_available_quaters(year, url = general_url): 
+        # Open in headless browser
+        driver = webdriver.Firefox(options=options)
+        driver.get(url)
+
+        # Click the year
+        click_element_by_text(driver, year)
+
+        return find_elements_by_tag(tag="span", content=driver.page_source, container_tag='div', container_class='wpfd-categories', exceptions=['Atrás'])
+       
+# Budget Service   
 class BudgetService:
     general_url = "https://sns.gob.do/transparencia/presupuesto/"
 
@@ -79,7 +95,7 @@ class BudgetService:
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
             # Parse the HTML content using BeautifulSoup
-            return find_elements_by_tag(response, "span", container_tag='div', container_class='wpfd-categories')
+            return find_elements_by_tag(tag="span", container_tag='div', container_class='wpfd-categories', response=response,)
         else:
             # Print an error message if the request was not successful
             print(f"Error: Unable to retrieve data. Status code: {response.status_code}")

@@ -13,6 +13,12 @@ Este módulo implementa la API utilizando FastApi para el proyecto DataGovRD.
 1. Clonar el repositorio de datagovrd:
 
    ```shell
+   git clone https://github.com/Open-CD/datagovrd.git
+   ```
+
+   Or using ssh
+
+   ```shell
    git clone git@github.com:Open-CD/datagovrd.git
    ```
 

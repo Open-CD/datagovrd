@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 
-# from app.services.sns_service import GeneralService, StatsService
 from app.utils.data import institutions_arr
 
 router = APIRouter()
