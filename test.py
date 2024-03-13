@@ -37,7 +37,7 @@ CONF_HEADLESS_BROWSER = True
 
 # print(GeneralService.get_about('https://sns.gob.do/sobre-nosotros/quienes-somos/'))
 # print(StatsService.get_available_years('https://sns.gob.do/transparencia/estadisticas-institucionales/'))
-print(StatsService.get_available_quaters(year="2023", url='https://sns.gob.do/transparencia/estadisticas-institucionales/'))
+print(StatsService.get_stats_year(year="2023", url='https://sns.gob.do/transparencia/estadisticas-institucionales/'))
 
 # # main function
 # if __name__ == "__main__":
