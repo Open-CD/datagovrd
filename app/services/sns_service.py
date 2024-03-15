@@ -5,6 +5,7 @@ from selenium import webdriver
 from app.utils.functions import find_first_element, find_elements_by_regex, find_elements_by_tag, click_element_by_text, find_links_to_excel_files, download_excel_files_from_url
 
 options = webdriver.FirefoxOptions()
+options.add_argument('--headless')
 
 # General information services
 
@@ -94,9 +95,10 @@ class StatsService:
             print(excel_links)
 
             # Download the Excel file
+            folder_name = f"downloads/sns/{year}"
             download_excel_files_from_url(excel_links, folder_name)
 
-        # return find_elements_by_tag(tag="span", content=driver.page_source, container_tag='div', container_class='wpfd-categories', exceptions=['Atrás'])
+        driver.close()
 
 # Budget Service   
 class BudgetService:
