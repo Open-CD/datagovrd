@@ -144,3 +144,16 @@ def find_elements_by_tag(tag, container_tag = None, container_class = None, resp
      
         # Use tag to find content in the HTML content or container tag
         return [p.get_text(strip=True) for p in elements if p.get_text(strip=True) not in exceptions]
+
+def delete_unnamed_columns(df):
+    # Find the first valid raw
+    first_raw = df.apply(lambda x: x.notnull().sum(), axis=1).idxmax()
+    # Return the DataFrame with the raws based in the first raw
+    df = df.iloc[first_raw:]
+    # Establish the first raw like headers
+    df.columns = df.iloc[0]
+    # Delete the first raw (now headers)
+    df = df.iloc[1:]
+    # Restart the index
+    df.reset_index(drop=True, inplace=True)
+    return df

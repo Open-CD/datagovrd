@@ -82,7 +82,6 @@ class StatsService:
         elements = StatsService.get_available_quaters(year=year)
 
         for element in elements:
-            print(element)
             driver.get(url)
             # Click the year
             click_element_by_text(driver, year)
@@ -92,7 +91,6 @@ class StatsService:
 
             content = driver.page_source
             excel_links = find_links_to_excel_files(content)
-            print(excel_links)
 
             # Download the Excel file
             folder_name = f"downloads/sns/{year}"
