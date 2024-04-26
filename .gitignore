@@ -3,3 +3,4 @@ downloads/**
 data
 venv 
 .env 
+.json
