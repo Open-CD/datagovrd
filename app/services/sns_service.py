@@ -152,6 +152,9 @@ class BudgetService:
 
         return find_elements_by_tag(tag="span", content=driver.page_source, container_tag='div', container_class='wpfd-categories', exceptions=['Atrás'])
 
+# Download Data Functions
+
+# Get the approved budget for a specific year
     def get_approved_budget_year(year, url=general_url, name_year=None):
         # Open in headless browser
         driver = webdriver.Firefox(options=options)
@@ -171,6 +174,7 @@ class BudgetService:
 
         driver.close()
 
+# Get the executed budget for a specific year
     def get_executed_budget_year(year, url=general_url, name_year=None):
         # Open in headless browser
         driver = webdriver.Firefox(options=options)
@@ -202,11 +206,22 @@ class BudgetService:
 
         driver.close()
 
-        # content = driver.page_source
-        # excel_links = find_links_to_excel_files(content)
+# Get the approved budget for a specific year
+    def get_annual_budget_report(year, url=general_url):
+        # Open in headless browser
+        driver = webdriver.Firefox(options=options)
+        driver.get(url)
 
-        # # Download the Excel file
-        # folder_name = f"downloads/sns/{year}/budget/approved/"
-        # download_excel_files_from_url(excel_links, folder_name)
+        time.sleep(2)
 
-        # driver.close()
+        # Click the year
+        click_element_by_text(driver, year)
+
+        content = driver.page_source
+        excel_links = find_links_to_excel_files(content)
+
+        # Download the Excel file
+        folder_name = f"downloads/sns/{year}/budget/annual-report/"
+        download_excel_files_from_url(excel_links, folder_name)
+
+        driver.close()
