@@ -5,7 +5,7 @@ import re
 
 # from app.utils.data import month_names_dict
 # from app.utils.functions import click_element_by_text, find_links_to_excel_files, download_excel_files_from_url
-from app.services.sns_service import GeneralService, StatsService
+from app.services.sns_service import GeneralService, StatsService, BudgetService
 
 # Reading Source files
 # url_sources = pd.read_csv('data/sources_list.csv')
@@ -37,7 +37,20 @@ CONF_HEADLESS_BROWSER = True
 
 # print(GeneralService.get_about('https://sns.gob.do/sobre-nosotros/quienes-somos/'))
 # print(StatsService.get_available_years('https://sns.gob.do/transparencia/estadisticas-institucionales/'))
-print(StatsService.get_stats_year(year="2022", url='https://sns.gob.do/transparencia/estadisticas-institucionales/'))
+# print(StatsService.get_stats_year(year="2022", url='https://sns.gob.do/transparencia/estadisticas-institucionales/'))
+# print(BudgetService.get_available_budget_items(
+#     budget='Ejecución del Presupuesto', url='https://sns.gob.do/transparencia/presupuesto/'))
+
+# print(BudgetService.get_available_budget_items(
+#     budget='Ejecución de Presupuesto 2023', url='https://sns.gob.do/transparencia/presupuesto/#38-1428-wpfd-ejecucion-de-presupuesto-2023'))
+
+print(BudgetService.get_approved_budget_year(
+    year='Presupuesto Aprobado del Año 2024', url='https://sns.gob.do/transparencia/presupuesto/#38-241-wpfd-presupuesto-aprobado-del-ano', name_year='2024'))
+
+
+print(BudgetService.get_executed_budget_year(
+    year='Ejecución de Presupuesto 2024', url='https://sns.gob.do/transparencia/presupuesto/#38-242-wpfd-ejecucion-del-presupuesto', name_year='2024'))
+
 
 # # main function
 # if __name__ == "__main__":
